@@ -1,0 +1,80 @@
+import random
+import sys
+
+# Stats
+# strength, magic, dexterity: 1-10
+
+# Random abilities
+randomabilities = ["Levitate", "Intimidate", "Huge Power", "Swift Swim", "Chlorophyll", "Technician", "Multiscale", "Sheer Force", "Regenerator", "Mold Breaker", "Magic Bounce", "Prankster", "Sand Stream", "Infiltrator", "Moxie", "Sturdy", "Volt Absorb", "Water Absorb", "Immunity", "Pressure", "Serene Grace", "Contrary", "Guts", "Flame Body", "Overgrow", "Blaze", "Torrent", "Swarm", "Soundproof", "Sap Sipper"]
+
+suffix1 = ["Aero", "Aggr", "Arbo", "Belli", "Blaz", "Bravi", "Bubb", "Cact", "Char", "Chime", "Cynda", "Drac", "Drag", "Dusk", "Elect", "Embo", "Explo", "Ferro", "Fluff", "Fro", "Gall", "Giga", "Glimm", "Gloom", "Gyar", "Hax", "Herac", "Hoot", "Hydr", "Iggly", "Infern", "Ivys", "Jolt", "Jung", "Kang", "Kilo", "Kro", "Larv", "Lumin", "Lux", "Mag", "Mare", "Metag", "Munch", "Murk", "Necro", "Noiv", "Odd", "Omast", "Onix", "Oric", "Pach", "Pidge", "Pika", "Poli", "Psy", "Quil", "Ramp", "Ray", "Regi", "Rhy", "Sand", "Sciz", "Scoli", "Shad", "Skarm", "Slak", "Snor", "Sol", "Sphe", "Sprig", "Squirt", "Star", "Swab", "Sylv", "Tenta", "Terr", "Tog", "Trap", "Trop", "Tyran", "Umbri", "Urs", "Veno", "Vict", "Volc", "Wail", "Whim", "Wing", "Woob", "Xatu", "Yan", "Zap", "Zyg"]
+suffix2 = ["zor", "tur", "gon", "mon", "lak", "vik", "zar", "bar", "rak", "vor", "lur", "mir", "tir", "nir", "kor", "fen", "zar", "rok", "dor", "gul", "lek", "mol", "tor", "vin", "zar", "bur", "zan", "gar", "lon", "ran", "zen", "ser", "var", "mor", "dur", "nol", "xor", "tal", "fir", "quar"]
+suffix3 = ["saur", "mite", "chu", "don", "dra", "duck", "leaf", "wing", "fang", "lisk", "roid", "bat", "mon", "horn", "shell", "lash", "tail", "geist", "claw", "beak", "jaw", "pede", "ette", "fox", "fish", "coon", "ram", "lion", "cat", "dog", "toad", "tick", "ox", "bear", "raptor", "hawk", "seer", "moth", "wyrm", "snake"]
+
+classes = ["Normal", "Fire", "Water", "Grass", "Electric", "Ice", "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy"]
+
+def lobby():
+    print("Welcome to Pokemon creator!")
+    print("The classes include:", ", ".join(classes))
+    userclass = input("Class: ")
+    usergender = input("Gender: ")
+    namegenerator(userclass, usergender)
+
+def namegenerator(userclass, usergender):
+    print("Would you like a randomly generated name for your Pokémon or a custom name?")
+    randomnameorcustom = input("Type 'random' or 'custom': ").lower()
+
+    if randomnameorcustom == "random":
+        suffix1name = random.choice(suffix1)
+        suffix2name = random.choice(suffix2)
+        suffix3name = random.choice(suffix3)
+        customname = suffix1name + suffix2name + suffix3name
+        print("Your Pokemon's name is:", customname)
+        charactercreate(userclass, usergender, customname)
+
+    elif randomnameorcustom == "custom":
+        customname = input("What would you like the name to be? ")
+        print("Amazing choice!!")
+        charactercreate(userclass, usergender, customname)
+
+    else:
+        print("Sorry, there seems to have been a problem.")
+        namegenerator(userclass, usergender)
+
+def charactercreate(userclass, usergender, name):
+    strength = random.randint(1, 10)
+    magic = random.randint(1, 10)
+    dexterity = random.randint(1, 10)
+    trait = random.choice(randomabilities)
+
+    print("--- Pokémon Summary ---\n")
+    print("Name:", name)
+    print("Class:", userclass)
+    print("Gender:", usergender)
+    print("Strength:", strength)
+    print("Magic:", magic)
+    print("Dexterity:", dexterity)
+    print("Trait:", trait)
+    print("------------------------")
+
+    try:
+        filename = input("Input filename to save your custom Pokémon: ")
+        with open(filename, "w") as f:
+            f.write(f"{name},{userclass},{usergender},{strength},{magic},{dexterity},{trait}\n")
+        print("Saved successfully!")
+    except Exception as e:
+        print("Error saving file:", e)
+
+    while True:
+        choice = input("Would you like to restart or exit? Type 'r' to restart or 'e' to exit: ").lower()
+        if choice == "r":
+            lobby()
+            break
+        elif choice == "e":
+            sys.exit()
+        else:
+            print("Looks like there was an issue. Try again.")
+            continue
+
+# Start the program
+lobby()

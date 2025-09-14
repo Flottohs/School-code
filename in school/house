@@ -1,0 +1,9 @@
+from turtle import *
+import turtle as t
+t.speed(0)
+
+
+t.Screen().bgcolor("skyblue")
+
+
+t.done()

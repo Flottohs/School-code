@@ -1,0 +1,70 @@
+from turtle import *
+import turtle as t
+import random
+
+t.speed(0)
+t.screensize(canvwidth=500, canvheight=500)
+t.penup()
+t.pensize(10)
+colour = ["red", "blue", "yellow", "white", "black"]
+
+def randrect():
+    width = random.randint(50, 150)
+    height = random.randint(50, 150)
+    x = random.randint(-250, 250 - width)
+    y = random.randint(-250, 250 - height)
+    return x, y, width, height 
+
+def randlines():
+    angle = random.choice([0, 90])
+    length = random.randint(100, 500)
+    if angle == 0:  # horizontal
+        x = random.randint(-250, 250 - length)
+        y = random.randint(-250, 250)
+    else:  # vertical
+        x = random.randint(-250, 250)
+        y = random.randint(-250, 250 - length)
+    return x, y, length, angle
+
+def border():
+    t.pensize(15)
+    t.pencolor("black")
+    t.goto(-250, -250)
+    t.pendown()
+    t.goto(250, -250)
+    t.goto(250, 250)
+    t.goto(-250, 250)
+    t.goto(-250, -250)
+    t.penup()
+
+
+def lines():
+    for i in range(random.randint(10, 20)):
+        x, y, length, angle = randlines()
+        t.pencolor("black")
+        t.goto(x, y)
+        t.setheading(angle)#sets angle to angle. unlike turn it doesnt accumulate the angle.
+        t.pendown()
+        t.forward(length)
+        t.penup()
+
+def shapes():
+    for i in range(random.randint(5, 15)):
+        x, y, width, height = randrect()
+        colorchoice = random.choice(colour)
+        t.goto(x, y)
+        t.pendown()
+        t.begin_fill()
+        t.fillcolor(colorchoice)
+        t.pencolor("black")
+        t.goto(x + width, y)
+        t.goto(x + width, y + height)
+        t.goto(x, y + height)
+        t.goto(x, y)
+        t.end_fill()
+        t.penup()
+
+border()
+lines()
+shapes()
+done()

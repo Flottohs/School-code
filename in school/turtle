@@ -1,0 +1,16 @@
+from turtle import *
+import random
+t = Turtle()
+
+def octagon():
+    
+    for sides in range(8):
+        colour = random.choice(["red","blue","green","purple","grey"])
+    
+        t.forward(100)
+        t.left(45)
+    fillcolor(colour)
+    done()
+    
+    
+octagon()

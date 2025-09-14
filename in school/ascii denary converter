@@ -1,0 +1,77 @@
+
+
+def choice():
+    print("Choose an option:")
+    print("1. Convert ASCII to Denary")
+    print("2. Convert Denary to ASCII")
+    print("3. Convert Binary to ASCII")
+    print("4. Convert ASCII to Binary")
+    user_choice = input("Enter 1 or 2 or 3 or 4: ")
+    if user_choice == "1":
+        asciitodenary()
+    elif user_choice == "2":
+        denarytoascii()
+    elif user_choice == "3":
+        binarytoascii()
+    elif user_choice == "4":
+        asciitobinary()
+    else:
+        print("Invalid choice. Please try again.")
+        choice()
+
+
+def asciitodenary():
+    denaryvalues = []
+    print("input text to convert to ascii")
+    text = input()
+    lengthoftext = len(text)
+    for i in range(1,lengthoftext):
+        denaryvalues.append(ord(text[i]))
+    print(f"The denary value for ASCII '{text}' is: {denaryvalues}")
+    endgame()
+
+
+def denarytoascii():
+    asciivalues = []
+    print("input text to convert to ascii")
+    text = input()
+    lengthoftext = len(text)
+    for i in range(1,lengthoftext):
+        asciivalues.append(chr(text[i]))
+    print(f"The denary value for ASCII '{text}' is: {asciivalues}")
+    endgame()
+
+
+def binarytoascii():
+    print("input binary")
+    binary_str = input()
+    ascii_text = ''.join(chr(int(b, 2)) for b in binary_str.split())
+    print(ascii_text)  
+    endgame()
+
+def asciitobinary():
+    print("input text")
+    text = input()
+    binary = ' '.join(format(ord(c), '08b') for c in text)
+    print(binary)
+    endgame()
+
+
+
+
+def endgame():
+    again = input("Do you want to convert another? (yes/no): ").lower()
+    if again == "yes":
+        choice()
+    elif again == "no":
+        print("Goodbye!")
+        exit()
+    else:
+        print("Invalid input. Please enter 'yes' or 'no'.")
+        endgame()
+
+
+
+
+        
+choice()

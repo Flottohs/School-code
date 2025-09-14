@@ -1,0 +1,158 @@
+import random, sys
+
+
+
+# Enter your hangman code here
+# Easy words
+easywords = ["apple", "banana", "cherry", "orange", "grape", "peach", "melon", "lemon", "kiwi", "mango",
+           "cat", "dog", "fish", "bird", "frog", "cow", "pig", "bat", "ant", "bee"]
+
+# Medium words
+mediumwords = ["python", "jumble", "puzzle", "wizard", "galaxy", "goblin", "treasure", "diamond", "castle", "dragon",
+           "monkey", "tunnel", "rocket", "pirate", "forest", "cactus", "beetle", "tiger", "puzzle", "lantern"]
+
+# Hard words
+hardwords = ["xylophone", "quizzical", "jazzy", "mnemonic", "zeppelin", "fjord", "labyrinth", "crypt", "whimsical", "pneumonia",
+           "rhapsody", "sphinx", "quarantine", "juxtapose", "vortex", "syzygy", "cobblestone", "anachronism", "pharaoh", "knapsack"]
+
+def lobby():
+  print("welcome to hangman")
+  print("input difficulty, E, M , H")
+  gamemodechoice = input()
+  if gamemodechoice == "E":
+    easymode()
+  elif gamemodechoice == "M":
+    mediummode()
+  elif gamemodechoice == "H":
+    hardmode()
+  else:
+    print("there seems to have been a issue")
+    lobby()
+
+
+
+def easymode():
+  chances =  10
+  guessed_letters = []
+  gameword = random.choice(easywords)
+  print(len(gameword))
+  word_display = ["_"] * len(gameword)
+  print ("abcdefghijklmnopqrstuvwxyz")
+  print(chances,"tries")
+  print("ready... Begin!")
+  while chances > 0 and "_" in word_display:
+        print("Current word:", " ".join(word_display))
+        guess = input("Guess a letter or the full word: ").lower()
+
+        if guess == gameword:  
+            print("Congratulations! You guessed the word:", gameword)
+            return
+        elif len(guess) == 1:  
+            if guess in guessed_letters:
+                print("You already guessed that letter.")
+            elif guess in gameword:
+                print("Correct!")
+                guessed_letters.append(guess)
+                for i, letter in enumerate(gameword):
+                    if letter == guess:
+                        word_display[i] = guess
+            else:
+                print("Incorrect!")
+                guessed_letters.append(guess)
+                chances -= 1
+        else:
+            print("Invalid input!")
+
+        print("Chances left:", chances)
+
+  if "_" not in word_display:
+    print("You won! The word was:", gameword)
+  else:
+    print("Game over! The word was:", gameword)
+
+
+
+
+def mediummode():
+  chances =  5
+  guessed_letters = []
+  gameword = random.choice(mediumwords)
+  print(len(gameword))
+  word_display = ["_"] * len(gameword)
+  print ("abcdefghijklmnopqrstuvwxyz")
+  print(chances,"tries")
+  print("ready... Begin!")
+  while chances > 0 and "_" in word_display:
+        print("Current word:", " ".join(word_display))
+        guess = input("Guess a letter or the full word: ").lower()
+
+        if guess == gameword:  
+            print("Congratulations! You guessed the word:", gameword)
+            return
+        elif len(guess) == 1:  
+            if guess in guessed_letters:
+                print("You already guessed that letter.")
+            elif guess in gameword:
+                print("Correct!")
+                guessed_letters.append(guess)
+                for i, letter in enumerate(gameword):
+                    if letter == guess:
+                        word_display[i] = guess
+            else:
+                print("Incorrect!")
+                guessed_letters.append(guess)
+                chances -= 1
+        else:
+            print("Invalid input!")
+
+        print("Chances left:", chances)
+
+  if "_" not in word_display:
+    print("You won! The word was:", gameword)
+  else:
+    print("Game over! The word was:", gameword)
+
+
+
+def hardmode():
+  chances =  3
+  guessed_letters = []
+  gameword = random.choice(hardwords)
+  print(len(gameword))
+  word_display = ["_"] * len(gameword)
+  print ("abcdefghijklmnopqrstuvwxyz")
+  print(chances,"tries")
+  print("ready... Begin!")
+  while chances > 0 and "_" in word_display:
+        print("Current word:", " ".join(word_display))
+        guess = input("Guess a letter or the full word: ").lower()
+
+        if guess == gameword:  
+            print("Congratulations! You guessed the word:", gameword)
+            return
+        elif len(guess) == 1:  
+            if guess in guessed_letters:
+                print("You already guessed that letter.")
+            elif guess in gameword:
+                print("Correct!")
+                guessed_letters.append(guess)
+                for i, letter in enumerate(gameword):
+                    if letter == guess:
+                        word_display[i] = guess
+            else:
+                print("Incorrect!")
+                guessed_letters.append(guess)
+                chances -= 1
+        else:
+            print("Invalid input!")
+
+        print("Chances left:", chances)
+
+  if "_" not in word_display:
+    print("You won! The word was:", gameword)
+  else:
+    print("Game over! The word was:", gameword)
+
+
+
+lobby()

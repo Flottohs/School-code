@@ -1,0 +1,123 @@
+import sys
+
+def print_list(lst):
+    print("Current list:")
+    for idx, item in enumerate(lst):
+        print(f"{idx}: {item}")
+
+def main():
+    lst = []
+    while True:
+        print("\n--- List Management Program ---")
+        print("1. Add item to list")
+        print("2. View list or part of it")
+        print("3. Remove items from list")
+        print("4. Save list to file")
+        print("5. Change case of list items")
+        print("6. Exit")
+        choice = input("Choose an option (1-6): ").strip()
+
+        if choice == '1':
+            user_item = input("Input your list item: ")
+            lst.append(user_item)
+            print(f"Added '{user_item}' to the list.")
+
+        elif choice == '2':
+            if not lst:
+                print("The list is empty.")
+                continue
+            print_list(lst)
+            view_choice = input("Would you like to view the full list (f), a specific item (i), or a slice (s)? ").strip().lower()
+            if view_choice == 'f':
+                print_list(lst)
+            elif view_choice == 'i':
+                try:
+                    pos = int(input("Enter the position of the item (0-based index): "))
+                    if 0 <= pos < len(lst):
+                        print(f"Item at position {pos}: {lst[pos]}")
+                    else:
+                        print("Position out of range.")
+                except ValueError:
+                    print("Invalid input, please enter an integer.")
+            elif view_choice == 's':
+                try:
+                    start = int(input("Enter start index (0-based): "))
+                    end = int(input("Enter end index (exclusive): "))
+                    if 0 <= start <= end <= len(lst):
+                        print("Slice of list:", lst[start:end])
+                    else:
+                        print("Invalid slice indices.")
+                except ValueError:
+                    print("Invalid input, please enter integers.")
+            else:
+                print("Invalid choice.")
+
+        elif choice == '3':
+            if not lst:
+                print("The list is empty.")
+                continue
+            print_list(lst)
+            rem_choice = input("Remove a single item (s) or a slice of items (l)? ").strip().lower()
+            if rem_choice == 's':
+                try:
+                    pos = int(input("Enter the position of the item to remove (0-based index): "))
+                    if 0 <= pos < len(lst):
+                        removed = lst.pop(pos)
+                        print(f"Removed '{removed}' from the list.")
+                    else:
+                        print("Position out of range.")
+                except ValueError:
+                    print("Invalid input, please enter an integer.")
+            elif rem_choice == 'l':
+                try:
+                    start = int(input("Enter start index of slice to remove (0-based): "))
+                    end = int(input("Enter end index (exclusive) of slice to remove: "))
+                    if 0 <= start <= end <= len(lst):
+                        removed_slice = lst[start:end]
+                        del lst[start:end]
+                        print(f"Removed slice {removed_slice} from the list.")
+                    else:
+                        print("Invalid slice indices.")
+                except ValueError:
+                    print("Invalid input, please enter integers.")
+            else:
+                print("Invalid choice.")
+
+        elif choice == '4':
+            if not lst:
+                print("The list is empty. Nothing to save.")
+                continue
+            filename = input("Enter the filename to save the list: ").strip()
+            try:
+                with open(filename, 'w') as f:
+                    for item in lst:
+                        f.write(item + '\n')
+                print(f"List saved to {filename}.")
+            except Exception as e:
+                print(f"An error occurred while saving: {e}")
+
+        elif choice == '5':
+            if not lst:
+                print("The list is empty.")
+                continue
+            case_choice = input("Convert list items to lower case (l), upper case (u), or leave unchanged (n)? ").strip().lower()
+            if case_choice == 'l':
+                lst = [item.lower() for item in lst]
+                print("All items converted to lower case.")
+            elif case_choice == 'u':
+                lst = [item.upper() for item in lst]
+                print("All items converted to upper case.")
+            elif case_choice == 'n':
+                print("No changes made.")
+            else:
+                print("Invalid choice.")
+
+        elif choice == '6':
+            print("Exiting program.")
+            sys.exit()
+
+        else:
+            print("Invalid option. Please choose a number between 1 and 6.")
+
+if __name__ == "__main__":
+    main()
