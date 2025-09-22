@@ -1,0 +1,79 @@
+import sys
+
+class sudokuvalidator():
+  @staticmethod
+  def validator(inputtedboard):
+    numrows = 9
+    lenrow = 9
+
+    # check rows
+    for row in range(numrows):
+      valuesinrow = {}
+      for col in range(lenrow):
+        cell = inputtedboard[row][col]
+        if cell not in valuesinrow:
+          valuesinrow[cell] = 1
+        else:
+          print("invalid board (row repeat)")
+          print("restart program to try again")
+          sys.exit()
+
+    # check columns
+    for column in range(numrows):
+      valuesincolumn = {}
+      for row in range(numrows):
+        cell = inputtedboard[row][column]
+        if cell not in valuesincolumn:
+          valuesincolumn[cell] = 1
+        else:
+          print("invalid board (column repeat)")
+          print("restart program to try again")
+          sys.exit()
+
+
+    #check sets of 3x3
+
+    for box_row_start in [0,3,6]:
+      for box_col_start in [0,3,6]:
+        valuesofrow = {}
+        for row in range(3):
+      #going to go through first 3 values in row one,2 and 3. so 9 in total
+          for col in range(3):
+            cell = inputtedboard[box_row_start + row][box_col_start +col]
+            if cell not in valuesofrow:
+              valuesofrow[cell] = 1
+            else:
+                print("invalid board (non 3x3 uniqueness)")
+                print("restart program to try again")
+                sys.exit()
+
+
+
+    print("valid board✅")
+
+
+
+
+
+
+
+
+
+
+
+  while True:
+    print("-----------------------------------")
+    print("Welcome to sudoku board validator ")
+    print("input your 9x9 board")
+    print("------------------------------------")
+    print("inputted board:")
+    inputtedboard = eval(input())
+    
+    if inputtedboard != "":
+      validator(inputtedboard)
+      break
+    else:
+      print("invalid input try again")
+      continue
+#works 😁
+#definitly a lot to process mentally, should draw out next time- thinking about all the loops. in loops and the board uggghhh

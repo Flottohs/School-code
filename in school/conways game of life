@@ -1,0 +1,144 @@
+# Conway's Game of Life
+import time
+import sys
+import random
+
+class ConwaysGameOfLife:
+    def __init__(self):
+        self.rows = 10
+        self.cols = 10
+        self.lifecycle = True
+        self.grid = []
+
+    def rules(self):
+        print("The Rules of Life and Death:\n"
+              "- Underpopulation: Any live cell with fewer than two live neighbours dies, as if by underpopulation.\n"
+              "- Survival: Any live cell with two or three live neighbours lives on to the next generation.\n"
+              "- Overpopulation: Any live cell with more than three live neighbours dies, as if by overpopulation.\n"
+              "- Reproduction: Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.")
+
+    def initial_grid(self):
+        grid = []
+        for _ in range(self.rows):
+            row = []
+            for _ in range(self.cols):
+                row.append(random.randint(0, 1))  # 0 = alive, 1 = dead
+            grid.append(row)
+        return grid
+
+    def print_grid(self, grid):
+        for row in grid:
+            line = ['.' if cell == 0 else '0' for cell in row]
+            print(" ".join(line))
+        print()
+
+    def gameover(self):
+        print("----------------------------------")
+        print("Game Over")
+        self.menu()
+
+    def input_handler(self):
+        """Ask user for input each generation"""
+        user_input = input("Type 'edit row col' to set a cell alive, 'q' to quit, or Enter to continue: ").strip()# removes blank spaces at end or beggining
+        
+        parts = user_input.split()
+
+
+
+        if len(parts) == 3 and parts[0].lower() == 'edit':
+            try:
+                row = int(parts[1])
+                col = int(parts[2])
+                if 0 <= row < self.rows and 0 <= col < self.cols:
+                    self.grid[row][col] = 0  # make alive
+                    print(f"Grid updated at ({row},{col})!")
+                else:
+                    print("Coordinates out of range.")
+            except ValueError:
+                print("Invalid input. Must enter integers for row and col.")
+
+        elif len(parts) == 1 and parts[0].lower() == 'q':
+            print("Quitting game.")
+            self.lifecycle = False
+            return False
+
+        return True
+
+    def game(self):
+        self.grid = self.initial_grid()
+        self.print_grid(self.grid)
+        print("Game started!")
+
+        while self.lifecycle:
+            new_grid = [row.copy() for row in self.grid]
+            life = False
+            death = False
+
+            for row in range(self.rows):
+                for col in range(self.cols):
+                    # print(self.cols, row, col, len(self.grid[0]), 0 if col <= self.cols-1 else 1,)
+                    neighbors = {
+                        'a1': self.grid[row-1][col-1] if row > 0 and col > 0 else 1,
+                        'a2': self.grid[row-1][col]   if row > 0 else 1,
+                        'a3': self.grid[row-1][col+1] if row > 0 and col < self.cols-1 else 1,
+                        'b1': self.grid[row][col-1]   if col > 0 else 1,
+                        'b3': self.grid[row][col+1]   if col < self.cols-1 else 1,
+                        'c1': self.grid[row+1][col-1] if row < self.rows-1 and col > 0 else 1,
+                        'c2': self.grid[row+1][col]   if row < self.rows-1 else 1,
+                        'c3': self.grid[row+1][col+1] if row < self.rows-1 and col < self.cols-1 else 1
+                    }
+
+                    live_neighbors = sum(1 for val in neighbors.values() if val == 0)
+                    
+                    current_state = self.grid[row][col]
+                    if self.grid[row][col] == 0:  # alive
+                        if live_neighbors < 2 or live_neighbors > 3:
+                            new_grid[row][col] = 1
+                            death = True
+                        else:
+                            new_grid[row][col] = 0
+                            life = True
+                    else:  # dead
+                        if live_neighbors == 3:
+                            new_grid[row][col] = 0
+                            life = True
+                        else:
+                            new_grid[row][col] = 1
+                            death = True
+
+            self.grid = new_grid
+            self.print_grid(self.grid)
+
+            if not life or not death:
+                self.gameover()
+                break
+
+            if not self.input_handler():
+                break
+
+            time.sleep(1)
+
+    def menu(self):
+        print("-------------------------------")
+        print("Welcome to the Game of Life \n")
+        print("Would you like the rules? Press SPACE (or any key to skip):")
+        failing = input()
+        if failing == ' ':
+            self.rules()
+
+        print("-------------------------------")
+        print("Would you like to start? (y/n)")
+        starting_choice = input().lower()
+
+        if starting_choice == 'y':
+            self.game()
+        elif starting_choice == 'n':
+            sys.exit()
+        else:
+            print('Invalid input, assuming you want to play anyway...')
+            self.game()
+
+
+# Start the game
+game = ConwaysGameOfLife()
+game.menu()
