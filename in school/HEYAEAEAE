@@ -1,0 +1,21 @@
+def caesar_cipher(text, shift):
+    result = ""
+
+    for char in text:
+        if char.isalpha():
+            # Handle uppercase and lowercase separately
+            base = ord('A') if char.isupper() else ord('a')
+            # Shift character and wrap around the alphabet
+            shifted = (ord(char) - base + shift) % 26 + base
+            result += chr(shifted)
+        else:
+            # Non-alphabetic characters remain unchanged
+            result += char
+
+    return result
+
+# Example usage:
+plaintext = "Hello, World!"
+shift = 3
+ciphertext = caesar_cipher(plaintext, shift)
+print("Encrypted:", ciphertext)
