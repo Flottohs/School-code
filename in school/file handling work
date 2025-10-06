@@ -1,0 +1,29 @@
+import re
+import os
+
+folder = r'C:/Documents/programming/github repositories/School-code/in school'
+print(os.listdir(folder))
+#reanom weird ahh eroor
+
+
+count = 0
+
+print("what word would you like to search for")
+word = input()
+    
+    
+
+    
+try:
+    with open('C:/Documents/programming/github repositories/School-code/in school/bookfile.txt', 'r') as file:
+
+        contents = file.read()
+        
+        count = len(re.findall(word, contents, re.IGNORECASE))
+        
+        print(count)
+
+except FileNotFoundError:
+    print("file not found")
+except Exception as e:
+    print(f"error: {e}")

@@ -1,0 +1,18 @@
+from datetime import *
+
+
+
+birth= datetime(2009,5,31,7,5,0)
+now = datetime.now()
+
+lifespan = now - birth
+print(lifespan)
+DEATH = datetime(2120,5,31,7,5,0)
+
+death = False
+while death != True:
+    neow = datetime.now()
+    countdown = DEATH - neow
+    print(countdown)
+
+

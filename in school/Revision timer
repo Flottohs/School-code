@@ -1,0 +1,20 @@
+import time 
+import datetime
+
+
+
+nowed = datetime.now()
+def timer(subject, timed):
+    print( timed - nowed)
+    
+    
+    
+def menu():
+    print(" how long do you wanna study for lill ninja , h , m ")
+    timeh = int(input())
+    timem = int(input())
+    timess = datetime(0,0,timeh,timem,0)
+    print("what subject is this for")
+    subjected = input()
+    timer(subjected,timess)
+    

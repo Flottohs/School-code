@@ -1,0 +1,8 @@
+import time
+
+x = 1
+start_time = time.time()
+for i in range(x):
+    pass
+
+print(time.time()-start_time)
