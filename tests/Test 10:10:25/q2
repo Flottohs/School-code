@@ -1,0 +1,36 @@
+chance = False
+while chance == False:
+    print("input a string")
+    userinput = input()
+    if len(userinput) != 5 and len(userinput) != 6 and len(userinput) != 7:
+        print("invalid")
+        continue
+    if userinput.upper() != userinput:
+        print("invalid")
+        continue
+    
+    
+    
+    dictionaryofinputs = {}
+    for i in range(len(userinput)):
+        dictionaryofinputs.setdefault(0)
+        if dictionaryofinputs[i] != 0:
+            print("invalid")
+            continue
+    total = 0
+    for i in range(userinput):
+        total += ord(userinput)
+    if total <=420:
+        print("INVALID")
+        continue
+    if total >= 600:
+        print("invalid")
+        continue
+    chance == True
+print("valid")
+
+    
+        
+        
+        
+        

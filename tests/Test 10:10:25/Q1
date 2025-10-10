@@ -1,0 +1,27 @@
+print("input integer:\n")
+num1 = int(input())
+print("input another integer:\n")
+num2 = int(input())
+if num1 > num2:
+    num = num1 // num2
+else:
+    num = num2// num1
+count = 0
+list = []
+while count != num:
+    count +=1
+    if count % 10 == 0:
+        list.append('X')
+    else:
+        if count % 5 == 0:
+            list.append('V')
+        else:
+            list.append('/')
+
+newlist = ''.join(list)
+
+print(newlist)
+    
+
+        
+        
