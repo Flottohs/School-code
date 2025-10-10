@@ -1,0 +1,10 @@
+def read_csv(text_file):
+    data = []
+    with open(text_file, 'r') as file:
+        for record in file:
+            record = record.strip('\n').split(',')
+            data.append(record)
+    return data
+
+data=read_csv('springfield_elementary_students.csv')
+print(int(data[0][2])+int(data[0][3])+int(data[0][4]))

@@ -1,0 +1,5 @@
+from PIL import Image
+
+im = Image.open("/Users/haydenfletcher/Documents/programming/githubrepositiories/School-code/inschool/images.png")
+im = im.convert("RGB")
+im.save("/Users/haydenfletcher/Documents/programming/githubrepositiories/School-code/inschool/images.gif")
