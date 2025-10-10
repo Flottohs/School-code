@@ -1,0 +1,26 @@
+import numpy as np
+'''
+
+Puzzle: You have two binary inputs x1 and x2 ∈{0,1}. You want a “majority” output: 1 if at least one input is 1, 0 if both are 0. Can you write a simple function that achieves this with addition and comparison?
+Perceptron - a model for deep learning. 
+Structure: Inputs → weights → sum → bias → activation → output.
+Equation: y=activation(w1x1+w2x2+b)
+Machine Learning: Adjust weights/bias to minimise errors on data.
+'''
+#training date
+x = np.array([0,0],[0,1],[1,0],[1,1] )
+
+y = np.array([0,0,0,1])
+
+w =np.zeros(2)
+b = 0
+lr = 0.1
+
+
+for epoch in range(10):
+    for xi, taget in zip(x,y):
+        if np.dot(w,xi) + b >= 0:
+            output = 1
+        else:
+            output = 0
+
