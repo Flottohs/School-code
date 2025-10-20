@@ -1,0 +1,26 @@
+import xml.etree.ElementTree as xml
+
+root = xml.Element("students")
+child = xml.Element("student")
+root.append(child)
+
+data=[["Thomas","Brown","27/3/2001", 'A'],["James","Frank","13/4/2002",'B']]
+
+for i in range(2):
+
+ firstname = xml.SubElement(child, "firstName")
+ lastname = xml.SubElement(child, "lastName")
+ dateofbirth = xml.SubElement(child, "dateOfBirth")
+ Grade = xml.SubElement(child, "Grade")
+ 
+ firstname.text = data[i][0]
+ lastname.text = data[i][1]
+ dateofbirth.text = data[i][2]
+ Grade.text = data[i][3]
+
+tree = xml.ElementTree(root)
+f = open("ex.xml", "wb")
+tree.write(f)
+f.close()
+
+

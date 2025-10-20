@@ -1,0 +1,27 @@
+<countries>
+ <nation>
+  <country>UK</country>
+  <population>65</population>
+  <capital>London</capital>
+ </nation>
+ <nation>
+  <country>France</country>
+  <population>66</population>
+  <capital>Paris</capital>
+ </nation>
+ <nation>
+  <country>China</country>
+  <population>1370</population>
+  <capital>Beijing</capital>
+ </nation>
+ <nation>
+  <country>USA</country>
+  <population>320</population>
+  <capital>Washington</capital>
+ </nation>
+ <nation>
+  <country>Russia</country>
+  <population>146</population>
+  <capital>Moscow</capital>
+ </nation>
+</countries>
